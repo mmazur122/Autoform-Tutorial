@@ -1,0 +1,21 @@
+<template name="posts">
+    <h1>Add Post</h1>
+
+    {{#autoForm collection="Posts" id="insertPostForm" type="insert"}}
+        <fieldset>
+            {{> afQuickField name='title'}}
+            {{> afQuickField name='content' rows=6}}
+            {{> afQuickField name='category'}}
+            {{> afQuickField name='tags' type='text'}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Insert</button>
+    {{/autoForm}}
+
+    <ul>
+        {{#each posts}}
+            <li><a href="{{pathFor 'post.show'}}">{{title}}</a> - {{content}}</li>
+        {{/each}}
+    </ul>
+
+    <button class="next">Next</button>
+</template>
