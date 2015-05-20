@@ -56,9 +56,15 @@
 
             //callback();
           });
-      //var _optionsSelector = _ddl + "//option[*]";
-      //var array = this.browser.getText(_optionsSelector);
+      //this.browser.click(_ddl).selectByVisibleText(_ddl, "Business");
+      //this.browser.selectByIndex(_ddl, 2, function(err, selectedValue){
+      //  console.log("Selected value with index 2: ", selectedValue);
+      //})
 
+      //var _optionsSelector = _ddl + "//option[2000]";
+      //var array = this.browser.getText(_optionsSelector);
+      //this.browser.setValue(_ddl, 2);
+      //console.log("typeof selected _ddl option: ", typeof(_optionsSelector));
       callback();
     });
 
@@ -97,6 +103,85 @@
         //.getText(_h1Selector).should.become(expectedText);
 
       });
+    //Scenario: completing and submitting form
+    this.When(/^I navigate to "([^"]*)"$/, function (relativePath, callback) {
+      // WebdriverIO supports Promises/A+ out the box, so you can return that too
+      this.browser. // this.browser is a pre-configured WebdriverIO + PhantomJS instance
+          url(url.resolve(process.env.ROOT_URL, relativePath)). // process.env.ROOT_URL always points to the mirror
+          call(callback);
+    });
+
+    //this.Then(/^I should see header "([^"]*)"$/, function (expectedTitle, callback) {
+    //  // you can use chai-as-promised in step definitions also
+    //  this.browser.
+    //    //waitForVisible('body *'). // WebdriverIO chain-able promise magic
+    //      getTitle().should.become(expectedTitle).and.notify(callback);
+    //});
+
+    this.Then(/^I should see header "([^"]*)"$/, function (expectedText, callback) {
+      var _headerSelector = "//h1[text()='" + expectedText + "']";
+      this.browser
+          .waitForExist(_headerSelector)
+          .isExisting(_headerSelector, function(err, isExisting){
+            assert.isTrue(isExisting);
+            callback();
+          });
+    });
+
+    this.Then(/^I should see label "([^"]*)" and fill the closest input field with "([^"]*)"$/, function (expectedText, inputValue, callback) {
+      var _labelSelector = "//label[text()='" + expectedText + "']";
+      var _inputSelector = "//label[text()='" + expectedText + "']/following-sibling::*[position()=1]";
+      this.browser
+          .waitForExist(_labelSelector)
+          .setValue(_inputSelector, inputValue).getValue(_inputSelector, function(err, value){
+            console.log("input has value: ", value);
+            callback();
+          });
+      //console.log("input has value: ", this.browser.getValue(_inputSelector));
+
+
+      //callback();
+    });
+
+    this.Then(/^I should click button "([^"]*)"$/, function (buttonText, callback) {
+      var _buttonSelector = "//button[text()='" + buttonText + "']";
+      //var _buttonSelector = "//button[@type='submit']";
+      console.log("_buttonSelector: ", _buttonSelector);
+      var _that=this;
+
+      this.browser
+          .waitForExist("button.insert")
+          .click("button.insert").then(function() {
+            callback();
+          });
+
+
+    });
+
+    this.Then(/^The input closest to "([^"]*)" should be "([^"]*)"$/, function (arg1, arg2, callback) {
+      var _that = this;
+      var _inputSelector = "//label[text()='" + arg1 + "']/following-sibling::*[position()=1]";
+      console.log("_inputSelector ", _inputSelector);
+      setTimeout(function() {
+        _that.browser.getValue(_inputSelector, function (err, value) {
+          console.log("input value after clicking insert button: ", value);
+          callback();
+        });
+      }, 1000);
+    });
+
+
+
+    //this.Then(/^I should click button "([^"]*)"$/, function (buttonText, callback) {
+    //  var _formSelector = "//form[@id='insertPostForm']";
+    //  var _inputSelector = "//label[text()='Title']/following-sibling::*[position()=1]";
+    //  console.log("_formSelector: ", _formSelector);
+    //  this.browser.waitForExist(_formSelector).submit(_formSelector).getValue(_inputSelector, function(err, value){
+    //    console.log("Title input value after clicking insert button: ", value);
+    //  });
+    //
+    //  callback();
+    //});
   }
 
 

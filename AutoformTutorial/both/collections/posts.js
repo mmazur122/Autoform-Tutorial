@@ -11,6 +11,7 @@ Posts.attachSchema(new SimpleSchema({
     content: {
         type: String,
         label: "Content",
+        optional: true,
     },
     category: {
         type: String,
@@ -23,6 +24,7 @@ Posts.attachSchema(new SimpleSchema({
                 {label: "Finance", value: "finance"}
             ]
         },
+        optional: true,
     },
     userId: {
         type: String,
@@ -31,6 +33,7 @@ Posts.attachSchema(new SimpleSchema({
     tags: {
         type: [String],
         label: "Tags",
+        optional: true,
     }
 }));
 

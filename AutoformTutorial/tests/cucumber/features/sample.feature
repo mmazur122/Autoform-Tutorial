@@ -22,9 +22,24 @@ Feature: One-liner description of this feature
     Then I should see the title "Autoform"
     And I should not see button "Insert1"
     And I should see Category drop down list
-  @dev
+
+
   Scenario:
     When I navigate to "/"
     Then I should see button "Next"
     And I click on button "Next" and should see "Random Page"
     #And I should see h1 "Random Page"
+
+  @dev
+  Scenario: Completing and submitting a form
+    When I navigate to "/"
+    Then I should see header "Add Post"
+    And I should see label "Title" and fill the closest input field with "random post"
+    #And I should fill the closest input field with "random post"
+#    And I should see label "Content"
+#    And I should fill the closes text area with "random content"
+#    And I should see label "TagsT"
+#    And I should fill the closest input field with "randomTag1, randomTag2, randomTag3
+    And I should click button "Insert"
+    And The input closest to "Title" should be ""
+    And The input closest to "Tags" should be "test"
