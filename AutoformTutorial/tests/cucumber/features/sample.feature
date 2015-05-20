@@ -12,8 +12,8 @@ Feature: One-liner description of this feature
   external documents and whatever is needed to create the full specification.
 
   # The background will be run for every scenario
-  Background:
-    Given I am a new user
+#  Background:
+#    Given I am a new user
 
   # This scenario will run as part of the Meteor dev cycle because it has the @dev tag
   @dev
@@ -32,7 +32,8 @@ Feature: One-liner description of this feature
 
   @dev
   Scenario: Completing and submitting a form
-    When I navigate to "/"
+    Given I am an authenticated user
+    #When I navigate to "/"
     Then I should see header "Add Post"
     And I should see label "Title" and fill the closest input field with "random post"
     #And I should fill the closest input field with "random post"

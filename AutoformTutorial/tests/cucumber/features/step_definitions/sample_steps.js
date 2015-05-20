@@ -104,12 +104,59 @@
 
       });
     //Scenario: completing and submitting form
-    this.When(/^I navigate to "([^"]*)"$/, function (relativePath, callback) {
-      // WebdriverIO supports Promises/A+ out the box, so you can return that too
-      this.browser. // this.browser is a pre-configured WebdriverIO + PhantomJS instance
-          url(url.resolve(process.env.ROOT_URL, relativePath)). // process.env.ROOT_URL always points to the mirror
-          call(callback);
+
+    this.Given(/^I am an authenticated user$/, function (callback){
+
+
+        this.browser.
+            execute(function() {
+                Meteor.logout();
+            });
+
+        this.browser
+            .waitForExist("//li[@id='login-dropdown-list']/a[contains(.,'Sign')]")
+            .click("//li[@id='login-dropdown-list']/a[contains(.,'Sign')]")
+            .waitForVisible("#login-email")
+            .setValue('#login-email', "admin3@thebrain.pro")
+            .setValue("#login-password", "password")
+            .click("#login-buttons-password");
+            //.click("//a[@id='signup-link']")
+            //.waitForVisible("//button[contains(.,'Create')]")
+            //.click("//button[contains(.,'Create')]")
+
+        var _adminSelector = '//li[@id="login-dropdown-list"]/a[contains(.,"@")]';
+
+        this.browser.waitForExist(_adminSelector).isVisible(_adminSelector, function(err, isVisible) {
+            assert.isTrue(isVisible);
+            callback();
+        });
+        //
+        //
+        //var _adminSelector = '//li[@id="login-dropdown-list"]/a[contains(.,"@")]';
+        //
+        //this.browser
+        //  .waitForExist("//li[@id='login-dropdown-list']")
+        //  .click("//li[@id='login-dropdown-list']")
+        //  .waitForVisible("//input[@id='login-email']")
+        //  .setValue('#login-email', "user@thebrain.pro")
+        //  .setValue("#login-password", "password")
+        //  .click("//a[@id='signup-link']")
+        //  .waitForVisible("//button[contains(.,'Create')]")
+        //  .click("//button[contains(.,'Create')]")
+        //    .waitForExist(_adminSelector)
+        //    .isVisible(_adminSelector, function(err, isVisible) {
+        //    assert.isTrue(isVisible);
+        //    callback();
+        //});
+
     });
+
+    //this.When(/^I navigate to "([^"]*)"$/, function (relativePath, callback) {
+    //  // WebdriverIO supports Promises/A+ out the box, so you can return that too
+    //  this.browser. // this.browser is a pre-configured WebdriverIO + PhantomJS instance
+    //      url(url.resolve(process.env.ROOT_URL, relativePath)). // process.env.ROOT_URL always points to the mirror
+    //      call(callback);
+    //});
 
     //this.Then(/^I should see header "([^"]*)"$/, function (expectedTitle, callback) {
     //  // you can use chai-as-promised in step definitions also
@@ -119,6 +166,7 @@
     //});
 
     this.Then(/^I should see header "([^"]*)"$/, function (expectedText, callback) {
+        console.log("inside next test");
       var _headerSelector = "//h1[text()='" + expectedText + "']";
       this.browser
           .waitForExist(_headerSelector)
@@ -165,12 +213,11 @@
       setTimeout(function() {
         _that.browser.getValue(_inputSelector, function (err, value) {
           console.log("input value after clicking insert button: ", value);
+            _that.browser.screenshot();
           callback();
         });
       }, 1000);
     });
-
-
 
     //this.Then(/^I should click button "([^"]*)"$/, function (buttonText, callback) {
     //  var _formSelector = "//form[@id='insertPostForm']";
