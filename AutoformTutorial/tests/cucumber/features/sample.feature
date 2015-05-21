@@ -16,7 +16,7 @@ Feature: One-liner description of this feature
 #    Given I am a new user
 
   # This scenario will run as part of the Meteor dev cycle because it has the @dev tag
-  @dev
+
   Scenario:
     When I navigate to "/"
     Then I should see the title "Autoform"
@@ -32,15 +32,15 @@ Feature: One-liner description of this feature
 
   @dev
   Scenario: Completing and submitting a form
-    Given I am an authenticated user
-    #When I navigate to "/"
+    Given I navigate to "/"
+    And I am an authenticated user
     Then I should see header "Add Post"
-    And I should see label "Title" and fill the closest input field with "random post"
-    #And I should fill the closest input field with "random post"
+    And I should see label "Title"
+    And The input closest to "Title" should be "random post"
 #    And I should see label "Content"
 #    And I should fill the closes text area with "random content"
 #    And I should see label "TagsT"
 #    And I should fill the closest input field with "randomTag1, randomTag2, randomTag3
     And I should click button "Insert"
     And The input closest to "Title" should be ""
-    And The input closest to "Tags" should be "test"
+    And I should remove user I created

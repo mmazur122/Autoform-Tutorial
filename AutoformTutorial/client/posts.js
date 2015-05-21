@@ -14,6 +14,7 @@ Template.posts.events({
     },
     "click .insert": function() {
         console.log("insert button was clicked");
-        $("input[data-schema-key='tags']").val("test");
+        //$("input[data-schema-key='tags']").val("test");
+        //Meteor.call("cleanDB");
     }
 });

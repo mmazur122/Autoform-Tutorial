@@ -2,7 +2,7 @@ Router.configure({
     layoutTemplate: 'main'
 });
 Router.route('/', function() {
-    console.log("going to /");
+    //console.log("going to /");
     this.render('posts');
 });
 Router.route('/posts/:_id', function () {
