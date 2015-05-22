@@ -6,12 +6,51 @@ Posts.attachSchema(new SimpleSchema({
     title: {
         type: String,
         label: "Title",
-        max: 200
+        max: 200,
+        optional: true,
     },
     content: {
         type: String,
         label: "Content",
         optional: true,
+    },
+    updateContentHistory: {
+        type: [Object],
+        optional: true,
+        autoValue: function() {
+            var content = this.field("content");
+            if (content.isSet) {
+                if (this.isInsert) {
+                    return [{
+                        date: new Date,
+                        changedBy: Meteor.userId(),
+                        content: content.value,
+                    }];
+                } else {
+                    return {
+                        $push: {
+                            date: new Date,
+                            changedBy: Meteor.userId(),
+                            content: content.value,
+                        }
+                    };
+                }
+            } else {
+                this.unset();
+            }
+        }
+    },
+    'updateContentHistory.$.date': {
+        type: Date,
+        optional: true,
+    },
+    'updateContentHistory.$.changedBy': {
+        type: String,
+        optional: true,
+    },
+    'updateContentHistory.$.content': {
+        type: String,
+        optional: true
     },
     category: {
         type: String,
@@ -34,7 +73,33 @@ Posts.attachSchema(new SimpleSchema({
         type: [String],
         label: "Tags",
         optional: true,
-    }
+    },
+    createdAt: {
+        type: Date,
+        autoValue: function() {
+            if (this.isInsert) {
+                return new Date;
+            } else if (this.isUpsert) {
+                return {$setOnInsert: new Date};
+            } else {
+                this.unset();
+            }
+
+        }
+    },
+    owner: {
+        type: String,
+        autoValue: function() {
+            if (this.isInsert) {
+                return Meteor.userId();
+            } else if (this.isUpsert) {
+                return {$setOnInsert: Meteor.userId()};
+            } else {
+                this.unset();
+            }
+        }
+    },
+
 }));
 
 
@@ -43,6 +108,7 @@ Posts.allow({
         return doc && doc.userId === userId;
     },
     update: function(userId, doc){
-        return doc && doc.userId === userId;
+        //return doc && doc.userId === userId;
+        return doc;
     }
 });

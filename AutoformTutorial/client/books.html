@@ -1,0 +1,23 @@
+<template name="insertBookForm">
+  {{#autoForm collection="Books" id="insertBookForm" type="insert"}}
+      <fieldset>
+          <legend>Add a Book</legend>
+        {{> afQuickField name='title'}}
+        {{> afQuickField name='author'}}
+        {{> afQuickField name='summary' rows=6}}
+        {{> afQuickField name='copies'}}
+        {{> afQuickField name='lastCheckedOut'}}
+          <div class="form-group{{#if afFieldIsInvalid name='cost'}} has-error{{/if}}">
+              <div class="input-group">
+                  <span class="input-group-addon">$</span>
+                {{> afFieldInput name='cost'}}
+                  <span class="input-group-addon">/each</span>
+              </div>
+            {{#if afFieldIsInvalid name='cost'}}
+                <span class="help-block">{{afFieldMessage name='cost'}}</span>
+            {{/if}}
+          </div>
+      </fieldset>
+      <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
+</template>

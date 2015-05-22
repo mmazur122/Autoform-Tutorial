@@ -30,7 +30,7 @@ Feature: One-liner description of this feature
     And I click on button "Next" and should see "Random Page"
     #And I should see h1 "Random Page"
 
-  @dev
+#  @dev
   Scenario: Completing and submitting a form
     Given I navigate to "/"
     And I am an authenticated user

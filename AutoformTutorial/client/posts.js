@@ -1,12 +1,8 @@
 Template.posts.helpers({
     posts: function(){
         return Posts.find();
-    }
+    },
 });
-
-Template.posts.rendered = function() {
-    console.log("rendered posts");
-};
 
 Template.posts.events({
     "click .next": function() {
