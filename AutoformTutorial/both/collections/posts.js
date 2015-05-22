@@ -24,14 +24,14 @@ Posts.attachSchema(new SimpleSchema({
                     return [{
                         date: new Date,
                         changedBy: Meteor.userId(),
-                        content: content.value,
+                        oldContent: content.value,
                     }];
                 } else {
                     return {
                         $push: {
                             date: new Date,
                             changedBy: Meteor.userId(),
-                            content: content.value,
+                            oldContent: content.value,
                         }
                     };
                 }
@@ -48,7 +48,7 @@ Posts.attachSchema(new SimpleSchema({
         type: String,
         optional: true,
     },
-    'updateContentHistory.$.content': {
+    'updateContentHistory.$.oldContent': {
         type: String,
         optional: true
     },
