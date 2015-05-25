@@ -1,19 +1,14 @@
 <template name="post">
     <h1>Edit</h1>
-    {{#autoForm collection="Posts" id="updatePostForm" type="update" doc=this autosave=autoSaveMode}}
+    {{#autoForm collection="Posts" id="updatePostForm" type="update" doc=this autosave=true}}
         <fieldset>
             {{> afQuickField name='title'}}
             {{> afQuickField name='content' rows=6}}
             <ul>
-                {{#each posts}}
                     {{#each updateContentHistory}}
-                    <li><a href="{{pathFor 'post.show'}}">{{oldContent}}</a> - {{date}}</li>
+                        {{> fieldHistory fieldName="content" historyContext=this}}
                     {{/each}}
-                {{/each}}
-                <!--not working-->
-                <!--{{#each content}}-->
-                    <!--<li><a href="{{pathFor 'post.show'}}">{{oldContent}}</a> - {{date}}</li>-->
-                <!--{{/each}}-->
+
             </ul>
             {{> afQuickField name='category'}}
             {{> afQuickField name='tags' type='text'}}

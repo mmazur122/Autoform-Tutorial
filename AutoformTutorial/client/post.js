@@ -2,18 +2,11 @@
  * Created by mmazur on 5/22/15.
  */
 Template.post.helpers({
-    posts: function() {
-        return Posts.find({_id: this._id});
-    },
-    //not working
-    content: function() {
-        return Posts.find({}, {fields: {'updateContentHistory': 1}});
+    updateContentHistory: function() {
+        var _post = Posts.findOne({_id: this._id});
+        if (_post) {
+            return _post.updateContentHistory;
+        }
     }
 
 });
-
-Template.post.events({
-    'click a': function(event) {
-        console.log("Event target: ", event.target);
-    }
-})

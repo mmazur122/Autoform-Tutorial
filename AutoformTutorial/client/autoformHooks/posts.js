@@ -9,7 +9,7 @@ var postHooks = {
             console.log("form with dateOfSubmission: ", doc);
             return doc;
 
-        }
+        },
     }
 };
 

@@ -7,6 +7,7 @@ Router.route('/', function() {
 });
 Router.route('/posts/:_id', function () {
     var item = Posts.findOne({_id: this.params._id});
+    Session.set("currentDoc", item);
     this.render('post', {data: item});
 }, {
     name: 'post.show'
