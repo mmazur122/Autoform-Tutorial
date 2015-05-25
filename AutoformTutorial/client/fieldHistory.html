@@ -1,5 +1,9 @@
 <template name="fieldHistory">
-    {{#with historyContext}}
-      <li><a data-field="{{fieldName}}">{{oldContent}}</a> - {{date}}</li>
-    {{/with}}
+    <ul>
+      {{#with historyContext}}
+        {{#each updateContentHistory}}
+            <li><a data-field="{{fieldName}}">{{oldContent}}</a> - {{date}}</li>
+        {{/each}}
+      {{/with}}
+    </ul>
 </template>

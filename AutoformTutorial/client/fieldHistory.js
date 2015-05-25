@@ -1,6 +1,9 @@
 Template.fieldHistory.helpers({
     fieldName: function() {
         return this.fieldName;
+    },
+    updateContentHistory: function() {
+        return this;
     }
 });
 Template.fieldHistory.events({
@@ -28,8 +31,7 @@ function updateDocumentIn(collection, documentOpts) {
 
     if (_mongoCollection) {
         var _setObject = {
-            $set: {
-            }
+            $set: {}
         };
 
         _setObject.$set[documentOpts.field] = documentOpts.newValue;

@@ -4,12 +4,7 @@
         <fieldset>
             {{> afQuickField name='title'}}
             {{> afQuickField name='content' rows=6}}
-            <ul>
-                    {{#each updateContentHistory}}
-                        {{> fieldHistory fieldName="content" historyContext=this}}
-                    {{/each}}
-
-            </ul>
+            {{> fieldHistory fieldName="content" historyContext=updateContentHistory}}
             {{> afQuickField name='category'}}
             {{> afQuickField name='tags' type='text'}}
         </fieldset>
