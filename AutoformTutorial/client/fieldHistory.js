@@ -1,3 +1,7 @@
+Template.fieldHistory.created = function () {
+    console.log("inside template.fieldhistory.created");
+}
+
 Template.fieldHistory.helpers({
     fieldName: function() {
         return this.fieldName;
@@ -33,7 +37,7 @@ Template.fieldHistory.events({
         console.log("Event target: ", event.target);
         var _documentOpts = {
             _id: _getDocumentId(1),
-            field: "content",
+            field: _getFieldToUpdate(0),
             //field: this.fieldName,
             newValue: event.target.parentNode.children[0].textContent
         };
@@ -74,4 +78,8 @@ function getMongoCollection(string) {
 
 function _getDocumentId(number) {
     return Template.parentData(number)._id;
+}
+
+function _getFieldToUpdate(number) {
+    return Template.parentData(number).historyContext[0].field;
 }

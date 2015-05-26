@@ -7,4 +7,3 @@ Template.post.helpers({
         return _post && _post.updateContentHistory;
     },
 });
-
