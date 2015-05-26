@@ -1,0 +1,31 @@
+<template name="modal">
+    <div id="modal" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">FieldName History of Changes</h3>
+                </div>
+                <div class="modal-body">
+                    <!--<table class="table">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>Edit</th>-->
+                            <!--<th>Changed by</th>-->
+                            <!--<th>Changed at</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr>-->
+                          <!--{{> fieldHistory fieldName="content" historyContext=updateContentHistory}}-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                    {{> fieldHistory fieldName="content" historyContext=updateContentHistory}}
+                </div>
+                <div class="modal-footer">
+                    <button id="dismissModal" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

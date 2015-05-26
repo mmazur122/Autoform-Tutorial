@@ -112,3 +112,4 @@ Posts.allow({
         return doc;
     }
 });
+

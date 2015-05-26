@@ -4,24 +4,44 @@ Template.fieldHistory.helpers({
     },
     updateContentHistory: function() {
         return this;
-    }
+    },
+
 });
 Template.fieldHistory.events({
-    'click a': function(event) {
+    //'click a': function(event) {
+    //    event.preventDefault();
+    //    event.stopImmediatePropagation();
+    //
+    //    console.log("Event target: ", event.target);
+    //    var _documentOpts = {
+    //        _id: _getDocumentId(),
+    //        field: "content",
+    //        //field: this.fieldName,
+    //        newValue: event.target.textContent
+    //    };
+    //    console.log("_documentOpts ", _documentOpts);
+    //    console.log("event ", event);
+    //    console.log(" this ", this);
+    //    updateDocumentIn("Posts", _documentOpts);
+    //
+    //},
+
+    'click tr': function(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
 
         console.log("Event target: ", event.target);
         var _documentOpts = {
-            _id: _getDocumentId(),
+            _id: _getDocumentId(1),
             field: "content",
-            newValue: event.target.textContent
+            //field: this.fieldName,
+            newValue: event.target.parentNode.children[0].textContent
         };
         console.log("_documentOpts ", _documentOpts);
         console.log("event ", event);
         console.log(" this ", this);
         updateDocumentIn("Posts", _documentOpts);
-
+        $("button#dismissModal").click();
     }
 });
 
@@ -52,6 +72,6 @@ function getMongoCollection(string) {
     return _mongoCollection;
 }
 
-function _getDocumentId() {
-    return Template.parentData(2)._id;
+function _getDocumentId(number) {
+    return Template.parentData(number)._id;
 }

@@ -4,7 +4,9 @@
         <fieldset>
             {{> afQuickField name='title'}}
             {{> afQuickField name='content' rows=6}}
-            {{> fieldHistory fieldName="content" historyContext=updateContentHistory}}
+            <!--{{> fieldHistory fieldName="content" historyContext=updateContentHistory}}-->
+            <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">View Past Changes</button></span>
+            {{> modal}}
             {{> afQuickField name='category'}}
             {{> afQuickField name='tags' type='text'}}
         </fieldset>
