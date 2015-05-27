@@ -39,22 +39,23 @@ Template.post.events({
 
             var _documentOpts = {
                 _id: Template.parentData(0)._id,
-                field: Template.parentData(0).contentHistory[0].field,
+                field: Template.parentData(0)[arrName][0].field,
                 //field: this.fieldName,
                 newValue: event.target.value,
+                arrName: historyArr
             };
 
-            Posts.update({_id: _documentOpts._id}, {$set: {"content": _documentOpts.newValue, "contentHistory": historyArr}});
+            var _setObject = {
+                $set: {}
+            };
+
+            _setObject.$set[_documentOpts.field] = _documentOpts.newValue;
+            _setObject.$set[arrName] = _documentOpts.arrName;
+
+            Posts.update({_id: _documentOpts._id}, _setObject);
             console.log("inside keyup event");
             console.log("event: ", event, "                ", event.target);
             //console.log("Parent data: ", Template.parentData(0));
         }
-
-
-
-
-        //console.log("historyArr[historyArr.length-1]: ", historyArr[historyArr.length-1]);
-
-
     }
 })

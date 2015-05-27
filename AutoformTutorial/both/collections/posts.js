@@ -9,50 +9,50 @@ Posts.attachSchema(new SimpleSchema({
         max: 200,
         optional: true,
     },
-    //titleHistory: {
-    //    type: [Object],
-    //    optional: true,
-    //    autoValue: function() {
-    //        var content = this.field("title");
-    //        if (content.isSet) {
-    //            if (this.isInsert) {
-    //                return [{
-    //                    date: new Date,
-    //                    changedBy: Meteor.userId(),
-    //                    oldContent: content.value,
-    //                    field: "title"
-    //                }];
-    //            } else {
-    //                return {
-    //                    $push: {
-    //                        date: new Date,
-    //                        changedBy: Meteor.userId(),
-    //                        oldContent: content.value,
-    //                        field: "title",
-    //                    }
-    //                };
-    //            }
-    //        } else {
-    //            this.unset();
-    //        }
-    //    }
-    //},
-    //'titleHistory.$.date': {
-    //    type: Date,
-    //    optional: true,
-    //},
-    //'titleHistory.$.changedBy': {
-    //    type: String,
-    //    optional: true,
-    //},
-    //'titleHistory.$.oldContent': {
-    //    type: String,
-    //    optional: true
-    //},
-    //'titleHistory.$.field': {
-    //    type: String,
-    //    optional: true
-    //},
+    titleHistory: {
+        type: [Object],
+        optional: true,
+        autoValue: function() {
+            var content = this.field("title");
+            if (content.isSet) {
+                if (this.isInsert) {
+                    return [{
+                        date: new Date,
+                        changedBy: Meteor.userId(),
+                        oldContent: content.value,
+                        field: "title"
+                    }];
+                } else {
+                    //return {
+                    //    $push: {
+                    //        date: new Date,
+                    //        changedBy: Meteor.userId(),
+                    //        oldContent: content.value,
+                    //        field: "title",
+                    //    }
+                    //};
+                }
+            } else {
+                this.unset();
+            }
+        }
+    },
+    'titleHistory.$.date': {
+        type: Date,
+        optional: true,
+    },
+    'titleHistory.$.changedBy': {
+        type: String,
+        optional: true,
+    },
+    'titleHistory.$.oldContent': {
+        type: String,
+        optional: true
+    },
+    'titleHistory.$.field': {
+        type: String,
+        optional: true
+    },
     content: {
         type: String,
         label: "Content",
