@@ -14,3 +14,4 @@ iron:router
 accounts-password
 ian:accounts-ui-bootstrap-3
 xolvio:cucumber
+momentjs:moment

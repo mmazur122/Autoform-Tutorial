@@ -1,14 +1,18 @@
 Template.fieldHistory.created = function () {
-    console.log("inside template.fieldhistory.created");
-}
+
+};
 
 Template.fieldHistory.helpers({
     fieldName: function() {
         return this.fieldName;
     },
-    updateContentHistory: function() {
+    contentHistory: function() {
         return this;
     },
+    formattedDate: function() {
+        var _date = this.date;
+        return moment(_date).fromNow();
+    }
 
 });
 Template.fieldHistory.events({
@@ -44,6 +48,7 @@ Template.fieldHistory.events({
         console.log("_documentOpts ", _documentOpts);
         console.log("event ", event);
         console.log(" this ", this);
+        console.log("event.type: ", event.type);
         updateDocumentIn("Posts", _documentOpts);
         $("button#dismissModal").click();
     }

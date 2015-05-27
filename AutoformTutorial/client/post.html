@@ -1,10 +1,10 @@
 <template name="post">
     <h1>Edit</h1>
-    {{#autoForm collection="Posts" id="updatePostForm" type="update" doc=this autosave=true}}
+    {{#autoForm collection="Posts" id="updatePostForm" type="update" doc=this}}
         <fieldset>
             {{> afQuickField name='title'}}
             {{> afQuickField name='content' rows=6}}
-            <!--{{> fieldHistory fieldName="content" historyContext=updateContentHistory}}-->
+            <!--{{> fieldHistory fieldName="content" historyContext=contentHistory}}-->
             <span><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">View Past Changes</button></span>
             {{> modal}}
             {{> afQuickField name='category'}}

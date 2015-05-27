@@ -58,7 +58,7 @@ Posts.attachSchema(new SimpleSchema({
         label: "Content",
         optional: true,
     },
-    updateContentHistory: {
+    contentHistory: {
         type: [Object],
         optional: true,
         autoValue: function() {
@@ -72,33 +72,33 @@ Posts.attachSchema(new SimpleSchema({
                         field: "content"
                     }];
                 } else {
-                    return {
-                        $push: {
-                            date: new Date,
-                            changedBy: Meteor.userId(),
-                            oldContent: content.value,
-                            field: "content",
-                        }
-                    };
+                    //return {
+                    //    $push: {
+                    //        date: new Date,
+                    //        changedBy: Meteor.userId(),
+                    //        oldContent: content.value,
+                    //        field: "content",
+                    //    }
+                    //};
                 }
             } else {
                 this.unset();
             }
         }
     },
-    'updateContentHistory.$.date': {
+    'contentHistory.$.date': {
         type: Date,
         optional: true,
     },
-    'updateContentHistory.$.changedBy': {
+    'contentHistory.$.changedBy': {
         type: String,
         optional: true,
     },
-    'updateContentHistory.$.oldContent': {
+    'contentHistory.$.oldContent': {
         type: String,
         optional: true
     },
-    'updateContentHistory.$.field': {
+    'contentHistory.$.field': {
         type: String,
         optional: true
     },
